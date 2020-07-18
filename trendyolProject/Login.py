@@ -21,7 +21,7 @@ class loginPage:
             self.driver = webdriver.Safari()
 
     def test_openWebPage(self):
-        self.driver.get("https://www.trendyol.com/")
+        self.driver.get('https://www.trendyol.com/')
         self.driver.maximize_window()
         self.driver.implicitly_wait(5)
         self.driver.find_element_by_css_selector('body > div.fancybox-overlay.fancybox-overlay-fixed > div > div > a').click()

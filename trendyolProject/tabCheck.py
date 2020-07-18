@@ -1,5 +1,7 @@
 import requests
 import unittest
+import base64
+from requests.exceptions import InvalidSchema, MissingSchema
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -17,22 +19,23 @@ class tabControl(unittest.TestCase) :
 
 
     def test_ImageControl(self,image):
-        try:
 
+        try:
             current_link = image.get_attribute("src")
-            r = requests.get(current_link)
-            if not (r.status_code // 100) == 2:
-                return False
-            else:
-                return True
+
+            if 'https://' in current_link:
+                r = requests.get(current_link)
+                if not (r.status_code // 100) == 2:
+                    return False
+                else:
+                    return True
+
 
         except requests.exceptions.RequestException as e:
             print(format(current_link, e))
             return True
 
-
     def test_ImageResult(self,all_images):
-        print("test_ImageResult")
         for image in all_images:
             if not self.test_ImageControl(image):
                 print("problem")
